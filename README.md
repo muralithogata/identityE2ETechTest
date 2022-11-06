@@ -1,6 +1,8 @@
 # identityE2ETechTest
 
-Please note: Need to add the chrome driver as follows to the code.  For Mac:
+Please note: Need to add the chrome driver as follows to the code.
+
+For Mac:
 
 If you are running on Mac, download and place the latest chrome driver in the following path
 
