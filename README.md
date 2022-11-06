@@ -8,7 +8,7 @@ If you are running on Mac, download and place the latest chrome driver in the fo
 
 /usr/local/bin
 
-For windows
+For Windows:
 
 Create a folder called ‘drivers’ under resources and  Download and place the latest chrome driver 
 
