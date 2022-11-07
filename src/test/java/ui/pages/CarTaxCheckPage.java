@@ -1,11 +1,15 @@
 package ui.pages;
 
 import org.junit.Assert;
+import org.junit.rules.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.util.CarDetails;
 
 import java.io.IOException;
+import java.time.Duration;
 
 public class CarTaxCheckPage {
 
@@ -31,19 +35,23 @@ public class CarTaxCheckPage {
     By year = By.xpath("//*[@id=\"m\"]/div[2]/div[3]/div[1]/div/span/div[2]/dl[4]/dd[1]");
 
 
-    public void verifyCarDetails(WebDriver driver) throws InterruptedException, IOException {
-        for (int i = 0; i < carDetails.getPostCodeFromInputTxtFile().size(); i++) {
+
+    public void verifyCarDetails(WebDriver driver) throws IOException {
+        for (int i = 0; i < carDetails.getRegnumberFromInputTxtFile().size(); i++) {
 
             if (i == 0) {
-                driver.findElement(input).sendKeys(carDetails.getPostCodeFromInputTxtFile().get(i));
+                driver.findElement(input).sendKeys(carDetails.getRegnumberFromInputTxtFile().get(i));
                 driver.findElement(button).click();
             } else {
                 driver.navigate().back();
-                driver.findElement(By.id("vrm-input")).sendKeys(carDetails.getPostCodeFromInputTxtFile().get(i));
+                driver.findElement(By.id("vrm-input")).sendKeys(carDetails.getRegnumberFromInputTxtFile().get(i));
                 driver.findElement(By.cssSelector("form > button")).click();
             }
-            Thread.sleep(5000);
-            String carReg = carDetails.getPostCodeFromInputTxtFile().get(i);
+
+            WebDriverWait wait = new WebDriverWait(driver , Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"selectProduct\"]/div[1]/div/div/h1")));
+
+            String carReg = carDetails.getRegnumberFromInputTxtFile().get(i);
             switch (carReg) {
                 case "DN09HRM":
                     Assert.assertEquals("Car reg number not found or not equal", carDetails.getExpectedFromOutputFile().get(2).getReg(), driver.findElement(reg).getText());

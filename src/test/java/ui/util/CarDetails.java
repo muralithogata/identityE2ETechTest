@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class CarDetails {
 
 
-    public List<String> getPostCodeFromInputTxtFile() {
+    public List<String> getRegnumberFromInputTxtFile() {
         // This method gets the car reg nummber from car_input.txt files
         BufferedReader reader;
         List<String> regnumber = new ArrayList<String>();
